@@ -1,0 +1,50 @@
+hook useState {
+    > import { useState } from 'react';
+    > permite usar estado em componentes de funções ( antes so podia usar em componentes de classes)
+    > ex {
+        const [NOME_DO_ESTADO, NOME_DA_FUNCAO_PARA_ALTERAR_ESTADO] = useState(VALOR_DO_ESTADO);
+
+        const [tech, setTech] = useState(['ReactJS', 'React Native']);
+
+        {tech.map(valor => (
+          <li key={valor}>{valor}</li>
+        ))}
+
+        funcaoMudarEstadoDeTech = setTech([...tech, 'um valor novo aqui'])
+    }
+}
+
+hook useEffect {
+    > sobrepoe os metodos dos ciclos de vida
+    > import { useEffect } from 'react';
+    > simulando o 'componentDidUpdate' e 'componentDidMount' {
+        useEffect(funcao_que_sera_executada, quando_sera_executada)
+
+        > a funcao do primeiro parametro sempre sera ativada quando o valor de tech for alterado
+        useEffect(() => {
+            localStorage.setItem('tech', JSON.stringify(tech))
+        }, [tech])
+
+        caso o segundo parametro do use effect seja um array vazio, ele é executado uma unica vez qd o componente é "montado"
+    }
+}
+
+hook useMemo {
+    > usado para executar funcoes SOMENTE em determinas circunstâncias
+    > import { useEffect } from 'react';
+    > sintaxe = const minhaVar = useEffect(() => {}, [variavel_para_ser_ouvida_quando_mudar_valor])
+    > const minhaVar = useEffect(() => meuArray.length, [variavel_para_ser_ouvida_quando_mudar_valor])
+    > agora a variavel 'minhaVar' so tera o seu valor alterado(recebendo o return na funcao), se o 'variavel_para_ser_ouvida_quando_mudar_valor' sofrer alguma alteraçÕ
+}
+
+hook useCallback {
+    > recomendado usar somente quando a funcao depende de variaveis do estado ou nas props
+    > usado para guardar funcoes na memoria SOMENTE em determinas circunstâncias
+    > import { useCallback } from 'react';
+    > ex {
+        const handleAdd = useCallback(() => {
+            processamento que a funcao faz...
+        }, [VARIAVEIS_PARA_SEREM_OUVIDAS])
+    }
+    > a funcao acima so sera 'gerada' na memoria SE a/as VARIAVEIS_PARA_SEREM_OUVIDAS sofrerem alteração
+}
