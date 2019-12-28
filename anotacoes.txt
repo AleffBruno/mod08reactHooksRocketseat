@@ -30,10 +30,13 @@ hook useEffect {
 }
 
 hook useMemo {
-    > usado para executar funcoes SOMENTE em determinas circunstâncias
-    > import { useEffect } from 'react';
-    > sintaxe = const minhaVar = useEffect(() => {}, [variavel_para_ser_ouvida_quando_mudar_valor])
-    > const minhaVar = useEffect(() => meuArray.length, [variavel_para_ser_ouvida_quando_mudar_valor])
+    > usado para executar funcoes SOMENTE em determinas circunstâncias {
+        ex: Existe um componente que tem um array, e é mostrado na tela array.length, porem toda vida que o componente redenrizar, o array.length será executado novamente, quando nao ha necessidade pois o array permanece com o MESMO tamanho, seria interessante somente re-calcular o array.length, caso o array sofra alteração, ai que entra o useMemo
+
+    }
+    > import { useMemo } from 'react';
+    > sintaxe = const minhaVar = useMemo(() => {}, [variavel_para_ser_ouvida_quando_mudar_valor])
+    > const minhaVar = useMemo(() => meuArray.length, [variavel_para_ser_ouvida_quando_mudar_valor])
     > agora a variavel 'minhaVar' so tera o seu valor alterado(recebendo o return na funcao), se o 'variavel_para_ser_ouvida_quando_mudar_valor' sofrer alguma alteraçÕ
 }
 
